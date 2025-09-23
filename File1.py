@@ -95,7 +95,37 @@ def draw_game(act, record, result):
   button_list = []
   #initially on startup (not active) only option is to deal new hand
   if not act:
-    deal = pygame.draw.rect
-# •create a class cards
-# •create 50 card items and check if there isnt a module specifically for cards 
-# •randomise a set of cards before dealing
+    deal = pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 0, 5)
+    pygame.draw.rect(screen, 'green', [150, 20, 300, 100], 3, 5)
+    deal_text = font.render('DEAL HAND', True, 'black')
+    screen.blit(deal_text.(165,50))
+    button_list.append(deal)
+
+  #once game started, shot hit and stand buttons and win/loss records
+  else:
+    hit = pygame.draw.rect(screen, 'white', [0, 700, 300, 100], 0, 5)
+    pygame.draw.rect(screen, 'green', [0, 700, 300, 100], 3, 5)
+    hit_text = font.render('HIT ME', True, 'black')
+    screen.blit(hit_text, (55, 735))
+    button_list.append(stand)
+    score_text = smaller_font.render(f'wins: {record[0]} losses: {record[1] pushes: {record[2]}', True, 'white')
+    screen.blit(score_text, (15, 840))
+    
+    #if there is an outcome for the hand that was played, display a restart button and tell user what happened
+  if result != 0:
+    screen.blit(font.render(results[result], True, 'white'), (15,25))
+    deal = pygame.draw.rect(screen, 'white', [150, 220, 300, 100], 0, 5)
+    pygame.draw.rect(screen, 'green', [150, 220, 300, 100], 3, 5)
+    pygame.draw.rect(screen, 'black', [153, 223, 294, 94], 3, 5)
+    deal_text = font.render('NEW HAND', True, 'black')
+    screen.blit(score_text, (165, 250))
+    button_list.append(deal)
+  return button_list
+
+#Endgame conditions funtion
+def check_endgame(hand_act, deal_score, play_score, result, totals, add):
+  #check end game scenarios is player has stood, busted or blackjack
+  #result 1- player bust, 2-win, 3-loss, 4-push
+  if not hand_act and deal_score >= 17:
+    if play_score > 21:
+      
